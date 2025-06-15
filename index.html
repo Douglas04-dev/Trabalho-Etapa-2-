@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tarefas Diárias</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarefas</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header id="header">
-    <div class="interface">
-        <section class="barra">
-            <span class="nome-barra">TAREFAS DIÁRIAS</span>
-        </section>
 
-        <section class="tarefas-container">
-            <input type="text" id="input-tarefa" placeholder="Digite uma nova tarefa..." />
-            <button id="btn-adicionar">Adicionar Tarefa</button>
+  <main>
+    <aside>
+      <div class="perfil">
+       <p class="nome">Arrume sua rotina!</p>
+      </div>
+      <hr />
+      <nav>
+        <ul>
+          <li class="barra-tarefas">Lista de Tarefas</li>
+        </ul>
+      </nav>
+      <button class="botao-nova-tarefa">Nova Tarefa</button>
+    </aside>
 
-            <ul id="lista-tarefas">
-              
-            </ul>
-        </section>
-    </div>
-</header>
-
-<script src="script.js"></script>
+    <section class="conteudo">
+      <div class="cabecalho-tarefas">
+        <h2>Lista de Tarefas</h2>
+        <select>
+          <option>Todas</option>
+          <option>Concluídas</option>
+          <option>Pendentes</option>
+        </select>
+      </div>
+      <div class="lista-tarefas">
+       
+    </section>
+  </main>
+  
 </body>
 </html>
