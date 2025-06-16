@@ -1,151 +1,154 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
 
-body {
-  background-color: #f3f4f6;
-  margin: 0;
-  padding: 0;
-  height: 100vh; 
-  display: flex;
-  justify-content: center; 
-  align-items: center;    
-}
+    body {
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      height: 100vh; 
+      display: flex;
+      justify-content: center; 
+      align-items: center;  
+    }
 
-header {
-  background-color: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
-}
+    main {
+      display: flex;
+      gap: 20px;
+      max-width: 1200px;
+      width: 100%;
+      height: auto;
+    }
 
-header h1 {
-  color: #2563eb;
-  font-size: 24px;
-}
+    aside {
+      background-color: white;
+      width: 250px;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 500px;
+    }
 
-.info-usuario {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .perfil .nome {
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2rem;
+    }
 
-.info-usuario button {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  background-color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
-main {
-  display: flex;
-  gap: 20px;
-  max-width: 1200px;
-  width: 100%;
-  height: auto;
-}
+    nav ul {
+      list-style: none;
+      margin-top: 20px;
+      padding-left: 0;
+    }
 
-aside {
-  background-color: white;
-  width: 250px;
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 500px;
-}
+    nav li {
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: #2563eb;
+      font-weight: normal;
+      background-color: transparent;
+      transition: background-color 0.3s ease, font-weight 0.3s ease;
+      user-select: none;
+    }
 
-.perfil .nome {
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.2rem;
-}
+    nav li:hover {
+      background-color: #e0edff;
+      font-weight: bold;
+    }
 
+    nav li.active {
+      background-color: #e0edff;
+      font-weight: bold;
+      cursor: default;
+    }
 
-nav ul {
-  list-style: none;
-  margin-top: 20px;
-}
+    .botao-nova-tarefa {
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: auto;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
 
-nav li {
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
+    .botao-nova-tarefa:hover {
+      background-color: #1d4ed8;
+    }
 
-nav .barra-tarefas {
-  background-color: #e0edff;
-  color: #2563eb;
-  font-weight: bold;
-}
+    .conteudo {
+      flex: 1;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.botao-nova-tarefa {
-  padding: 10px;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: auto;
-}
+    .cabecalho-tarefas {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      
+    }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
+    .cabecalho-tarefas h2 {
+      font-size: 20px;
+    }
 
-.modal-conteudo {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 400px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
+    .view {
+      opacity: 0;
+      display: none;
+      transition: opacity 0.4s ease;
+      position: absolute;
+      top: 20px; 
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      overflow-y: auto;
+    }
 
-.modal-cabecalho {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
+    .view.active {
+      display: block;
+      opacity: 1;
+      position: relative;
+    }
 
-.modal-cabecalho h3 {
-  margin: 0;
-}
-
-.conteudo {
-  flex: 1;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.cabecalho-tarefas {
+   .cabecalho-tarefas {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding-right: 30px; 
+  gap: 10px;
 }
 
-.cabecalho-tarefas h2 {
-  font-size: 20px;
+.cabecalho-tarefas select {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  min-width: 140px;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  transition: border-color 0.2s ease;
+  margin-right: 10px; 
 }
 
-.lista-tarefas {
-
+.cabecalho-tarefas select:hover,
+.cabecalho-tarefas select:focus {
+  border-color: #2563eb;
+  outline: none;
 }

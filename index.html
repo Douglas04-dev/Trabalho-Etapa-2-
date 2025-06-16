@@ -6,7 +6,10 @@
   <title>Tarefas</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
+
 <body>
+  
 
   <main>
     <aside>
@@ -16,25 +19,39 @@
       <hr />
       <nav>
         <ul>
-          <li class="barra-tarefas">Lista de Tarefas</li>
+          <li class="barra-tarefas active" data-view="tarefas">Tarefas</li>
+          <li class="barra-tarefas" data-view="calendario">Calendário</li>
         </ul>
       </nav>
       <button class="botao-nova-tarefa">Nova Tarefa</button>
     </aside>
+ <section class="conteudo">
 
-    <section class="conteudo">
-      <div class="cabecalho-tarefas">
-        <h2>Lista de Tarefas</h2>
-        <select>
-          <option>Todas</option>
-          <option>Concluídas</option>
-          <option>Pendentes</option>
-        </select>
+      <!-- View tarefas -->
+      <div id="tarefas" class="view active">
+        <div class="cabecalho-tarefas">
+          <h2>Lista de Tarefas</h2>
+          <select>
+            <option>Todas</option>
+            <option>Concluídas</option>
+            <option>Pendentes</option>
+          </select>
+        </div>
+        <div class="lista-tarefas">
+          <p>Aqui vai a lista das tarefas...</p>
+        </div>
       </div>
-      <div class="lista-tarefas">
-       
+
+      <!-- View calendário -->
+      <div id="calendario" class="view">
+        <h2>Calendário</h2>
+        <p>Aqui vai o calendário.</p>
+      </div>
     </section>
+
   </main>
+
+  <script src="script.js"></script>
   
 </body>
 </html>
