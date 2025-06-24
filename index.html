@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,13 +8,12 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-
 <body>
 
   <main>
     <aside>
       <div class="perfil">
-       <p class="nome">Arrume sua rotina!</p>
+        <p class="nome">Arrume sua rotina!</p>
       </div>
       <hr />
       <nav>
@@ -21,96 +21,83 @@
           <li class="barra-tarefas active" data-view="tarefas">Tarefas</li>
           <li class="barra-tarefas" data-view="calendario">Calendário</li>
         </ul>
-
-        
       </nav>
 
       <!-- Botão-->
       <button class="botao-nova-tarefa" onclick="janela()">Nova Tarefa</button>
     </aside>
 
- <section class="conteudo">
+    <section class="conteudo">
 
+      <!-- Nova janela -->
+      <div id="abrir" class="janela_abrir">
+        <div class="formulario">
+          <form>
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" />
 
-  <!--Nova janela-->
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="4"></textarea>
 
+            <div class="linha">
+              <div>
+                <label for="data">Data</label>
+                <input type="date" id="data" name="data" />
+              </div>
+              <div>
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" name="prioridade" class="prioridade">
+                  <option>Alta</option>
+                  <option>Média</option>
+                  <option>Baixa</option>
+                </select>
+              </div>
+            </div>
 
-  <div id="abrir" class="janela_abrir">
-    <div class="formulario">
-    <form>
-      <label for="titulo">Título</label>
-      <input type="text" id="titulo" name="titulo" />
-
-      <label for="descricao">Descrição</label>
-      <textarea id="descricao" name="descricao" rows="4"></textarea>
-
-      <div class="linha">
-        <div>
-          <label for="data">Data</label>
-          <input type="date" id="data" name="data" />
-        </div>
-        <div>
-          <label for="prioridade">Prioridade</label>
-          <select id="prioridade" name="prioridade" class="prioridade">
-            <option>Alta</option>
-            <option>Média</option>
-            <option>Baixa</option>
-          </select>
+            <div class="botoes">
+              <button type="button" class="btn-cancelar" onclick="fechar()">Cancelar</button>
+              <button type="submit" class="btn-salvar">Salvar</button>
+            </div>
+          </form>
         </div>
       </div>
-
-      <div class="botoes">
-        <button type="button" class="btn-cancelar" onclick="fechar()">Cancelar</button>
-        <button type="submit" class="btn-salvar">Salvar</button>
-      </div>
-    </form>
-  </div>  
-
-
-
-
-  </div>
-
 
       <!-- Aba de tarefas -->
       <div id="tarefas" class="view active">
         <div class="cabecalho-tarefas">
           <h2>Lista de Tarefas</h2>
-          <select>
-            <option>Todas</option>
-            <option>Concluídas</option>
-            <option>Pendentes</option>
+          <select id="filtro-tarefas">
+            <option value="todas">Todas</option>
+            <option value="concluidas">Concluídas</option>
+            <option value="pendentes">Pendentes</option>
+            <option value="hoje">Hoje</option>
           </select>
         </div>
-        <div class="lista-tarefas">
-          <p>Aqui vai a lista das tarefas...</p>
+        <div class="lista-tarefas" id="lista-tarefas">
+          <!-- Tarefas serão exibidas aqui -->
         </div>
       </div>
 
       <!-- Parte de calendário -->
-    
+      <div id="calendario" class="view">
+        <div class="calendario">
+          <div class="cabecalho">
+            <button id="prev">&#8249;</button>
+            <h2 id="mesAno"></h2>
+            <button id="next">&#8250;</button>
+          </div>
 
-         <div id="calendario" class="view">
-           <div class="calendario">
-    <div class="cabecalho">
-      <button id="prev">&#8249;</button>
-      <h2 id="mesAno"></h2>
-      <button id="next">&#8250;</button>
-    </div>
+          <div class="dias-semana">
+            <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+          </div>
 
-    <div class="dias-semana">
-      <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
-    </div>
-    
-    <div id="dias" class="dias"></div>
-  </div>                  
-          
+          <div id="dias" class="dias"></div>
+        </div>
       </div>
-    </section>
 
+    </section>
   </main>
 
   <script src="script.js"></script>
-  
 </body>
 </html>
