@@ -14,6 +14,7 @@ menuItems.forEach(item => {
   });
 });
 
+//Modal
 function janela() {
   document.getElementById("abrir").style.display = "flex";
 }
@@ -22,6 +23,7 @@ function fechar() {
   document.getElementById("abrir").style.display = "none";
 }
 
+//Calendário
 const diasContainer = document.getElementById('dias');
 const mesAno = document.getElementById('mesAno');
 const btnPrev = document.getElementById('prev');
@@ -49,18 +51,45 @@ btnNext.addEventListener('click', () => {
   renderizarCalendario();
 });
 
+//Chamar Modal no calendário
 diasContainer.addEventListener('click', (e) => {
   if (e.target.tagName === 'DIV' && e.target.textContent.trim() !== '') {
     const dia = e.target.textContent.trim().padStart(2, '0');
     const mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
     const ano = dataAtual.getFullYear();
-    document.getElementById('data').value = `${ano}-${mes}-${dia}`;
+    const dataSelecionada = `${ano}-${mes}-${dia}`;
+
+  
+    document.getElementById('data').value = dataSelecionada;
+
+    
+    const tarefasDoDia = tarefas.filter(t => t.data === dataSelecionada);
+    const container = document.getElementById('tarefas-do-dia');
+    container.innerHTML = '';
+
+    if (tarefasDoDia.length === 0) {
+      container.innerHTML = `<p style="color: #666;">Nenhuma tarefa para este dia.</p>`;
+    } else {
+      container.innerHTML = `<h4>Tarefas deste dia:</h4>`;
+      tarefasDoDia.forEach(t => {
+        container.innerHTML += `
+          <div class="tarefa-listada" style="border: 1px solid #ccc; padding: 6px; margin-top: 5px; border-radius: 5px;">
+            <strong>${t.titulo}</strong><br />
+            <small>${t.descricao || ''}</small><br />
+            <em>Prioridade: ${t.prioridade}</em>
+          </div>
+        `;
+      });
+    }
+
     janela();
   }
 });
 
 renderizarCalendario();
 
+
+//Filtro
 let tarefas = [];
 let tarefaEditando = null;
 
