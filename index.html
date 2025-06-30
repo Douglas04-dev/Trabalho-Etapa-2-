@@ -64,31 +64,28 @@
 
       <!-- Lista de Tarefas -->
       <div id="tarefas" class="view active">
-        <div class="cabecalho-tarefas">
-          <h2>Lista de Tarefas</h2>
-          <div>
-            <input type="text" id="filtro-nome" placeholder="Filtrar por nome..." />
-          </div>
-          <div>
-            <select id="filtro-prioridade">
-              <option value="">Todas as Prioridades</option>
-              <option value="Alta">Alta</option>
-              <option value="Média">Média</option>
-              <option value="Baixa">Baixa</option>
-            </select>
-          </div>
-          <div>
-            <select id="filtro-tarefas">
-              <option value="todas">Todas</option>
-              <option value="concluidas">Concluídas</option>
-              <option value="pendentes">Pendentes</option>
-              <option value="hoje">Hoje</option>
-            </select>
-          </div>
-          <div>
-            <button type="button" onclick="limparFiltros()">Limpar Filtros</button>
-          </div>
-        </div>
+     <div class="cabecalho-tarefas">
+  <h2>Lista de Tarefas</h2>
+  <div class="filtros-tarefas">
+    <input type="text" id="filtro-nome" placeholder="Filtrar por nome..." />
+    <div class="filtros-linha">
+      <select id="filtro-prioridade">
+        <option value="">Todas as Prioridades</option>
+        <option value="Alta">Alta</option>
+        <option value="Média">Média</option>
+        <option value="Baixa">Baixa</option>
+      </select>
+      <select id="filtro-tarefas">
+        <option value="todas">Todas</option>
+        <option value="concluidas">Concluídas</option>
+        <option value="pendentes">Pendentes</option>
+        <option value="hoje">Hoje</option>
+      </select>
+      <button type="button" onclick="limparFiltros()">Limpar Filtros</button>
+    </div>
+  </div>
+</div>
+
         <div class="lista-tarefas" id="lista-tarefas"></div>
       </div>
 

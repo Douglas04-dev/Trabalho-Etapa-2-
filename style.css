@@ -414,3 +414,64 @@ body {
   opacity: 0.9;
 }
 
+.cabecalho-tarefas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: flex-start; /* <-- ISSO AQUI */
+}
+
+.cabecalho-tarefas h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  
+}
+
+.filtros-tarefas {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+  width: 100%;
+}
+
+.filtros-linha {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filtros-tarefas input[type="text"] {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  background-color: white;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 0; 
+}
+
+
+.filtros-linha select,
+.filtros-linha button {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  transition: border-color 0.3s ease;
+  padding: 6px 10px; 
+  font-size: 0.85rem; 
+  min-width: 120px; 
+}
+.filtros-linha button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.filtros-linha button:hover {
+  background-color: #1d4ed8;
+}
