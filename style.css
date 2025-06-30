@@ -475,3 +475,32 @@ body {
 .filtros-linha button:hover {
   background-color: #1d4ed8;
 }
+
+.lista-tarefas {
+  max-height: 65vh; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+
+body, html {
+  overflow: hidden;
+  height: 100%;
+}
+
+.conteudo {
+  overflow: hidden;
+  height: 100%;
+}
+
+#sentinela {
+  height: 1px;
+}
+
+#paginacao button:disabled {
+  background-color: #666;
+  color: white;
+  cursor: default;
+  font-weight: bold;
+}

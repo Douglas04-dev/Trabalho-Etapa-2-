@@ -1,4 +1,4 @@
-// Funções de navegação e modal
+
 const menuItems = document.querySelectorAll('nav ul li.barra-tarefas');
 const views = document.querySelectorAll('.view');
 
@@ -147,15 +147,23 @@ function excluirTarefa(index) {
   }
 }
 
-function renderizarTarefas(filtro = 'todas') {
-  const lista = document.getElementById('lista-tarefas');
-  lista.innerHTML = '';
-  const hoje = new Date().toISOString().split('T')[0];
+// Paginação numerada
+let paginaAtual = 1;
+const porPagina = 5;
+let tarefasFiltradas = [];
 
+function renderizarTarefas(filtro = 'todas', resetar = true) {
+  const lista = document.getElementById('lista-tarefas');
+  const hoje = new Date().toISOString().split('T')[0];
   const filtroNome = document.getElementById('filtro-nome').value.toLowerCase();
   const filtroPrioridade = document.getElementById('filtro-prioridade').value;
 
-  let filtradas = tarefas.filter(t => {
+  if (resetar) {
+    lista.innerHTML = '';
+    paginaAtual = 1; // resetar pagina para 1
+  }
+
+  tarefasFiltradas = tarefas.filter(t => {
     if (filtro === 'concluidas' && !t.concluida) return false;
     if (filtro === 'pendentes' && t.concluida) return false;
     if (filtro === 'hoje' && t.data !== hoje) return false;
@@ -165,15 +173,26 @@ function renderizarTarefas(filtro = 'todas') {
   });
 
   if (filtro === 'hoje') {
-    filtradas.sort((a, b) => (a.horario || '').localeCompare(b.horario || ''));
+    tarefasFiltradas.sort((a, b) => (a.horario || '').localeCompare(b.horario || ''));
   }
 
-  if (filtradas.length === 0) {
+  const totalPaginas = Math.ceil(tarefasFiltradas.length / porPagina);
+  if (paginaAtual > totalPaginas) paginaAtual = totalPaginas || 1;
+
+  const inicio = (paginaAtual - 1) * porPagina;
+  const fim = inicio + porPagina;
+  const paginaTarefas = tarefasFiltradas.slice(inicio, fim);
+
+  lista.innerHTML = '';
+
+  if (paginaTarefas.length === 0) {
     lista.innerHTML = '<p>Nenhuma tarefa encontrada.</p>';
+    document.getElementById('paginacao').innerHTML = '';
     return;
   }
 
-  filtradas.forEach((t, i) => {
+  paginaTarefas.forEach((t, i) => {
+    const indexReal = tarefas.indexOf(t);
     const el = document.createElement('div');
     el.className = 'tarefa';
     el.innerHTML = `
@@ -183,22 +202,50 @@ function renderizarTarefas(filtro = 'todas') {
       <p><strong>Horário:</strong> ${t.horario || 'Não informado'}</p>
       <p><strong>Prioridade:</strong> ${t.prioridade}</p>
       <p><strong>Status:</strong> ${t.concluida ? 'Concluída' : 'Pendente'}</p>
-      <button onclick="toggleStatus(${i})">${t.concluida ? 'Marcar como Pendente' : 'Concluir'}</button>
-      <button onclick="editarTarefa(${i})">Editar</button>
-      <button onclick="excluirTarefa(${i})">Excluir</button>
+      <button onclick="toggleStatus(${indexReal})">${t.concluida ? 'Marcar como Pendente' : 'Concluir'}</button>
+      <button onclick="editarTarefa(${indexReal})">Editar</button>
+      <button onclick="excluirTarefa(${indexReal})">Excluir</button>
     `;
     lista.appendChild(el);
   });
+
+  renderizarPaginacao(totalPaginas);
 }
 
-// Eventos dos filtros
+function renderizarPaginacao(totalPaginas) {
+  const paginacao = document.getElementById('paginacao');
+  paginacao.innerHTML = '';
+
+  for (let i = 1; i <= totalPaginas; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.disabled = (i === paginaAtual);
+    btn.style.margin = '0 5px';
+    btn.style.padding = '5px 10px';
+    btn.style.cursor = (i === paginaAtual) ? 'default' : 'pointer';
+
+  btn.addEventListener('click', () => {
+  if (i === paginaAtual) return; 
+  paginaAtual = i; 
+  renderizarTarefas(document.getElementById('filtro-tarefas').value, false);
+});
+
+    paginacao.appendChild(btn);
+  }
+}
+
+
+// Eventos dos filtros — resetam páginaAtual pra 1 e re-renderizam
 document.getElementById('filtro-tarefas').addEventListener('change', e => {
+  paginaAtual = 1;
   renderizarTarefas(e.target.value);
 });
 document.getElementById('filtro-nome').addEventListener('input', () => {
+  paginaAtual = 1;
   renderizarTarefas(document.getElementById('filtro-tarefas').value);
 });
 document.getElementById('filtro-prioridade').addEventListener('change', () => {
+  paginaAtual = 1;
   renderizarTarefas(document.getElementById('filtro-tarefas').value);
 });
 
@@ -207,9 +254,9 @@ function limparFiltros() {
   document.getElementById('filtro-nome').value = '';
   document.getElementById('filtro-prioridade').value = '';
   document.getElementById('filtro-tarefas').value = 'todas';
+  paginaAtual = 1;
   renderizarTarefas('todas');
 }
-
 // Inicialização
 carregarTarefas();
 renderizarTarefas();
